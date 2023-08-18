@@ -1,0 +1,9 @@
+vintf_compatibility_matrix {
+    name: "rvcam_compatibility_matrix.xml",
+    stem: "compatibility_matrix.xml",
+    system_ext_specific: true,
+    // product_specific: true, // for product FCM
+    srcs: [
+        "rvcam_compatibility_matrix.xml",
+    ],
+}
