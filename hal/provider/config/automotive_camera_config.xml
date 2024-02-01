@@ -49,5 +49,6 @@
         </FpsList>
         <!-- orientation -->
         <Orientation  degree="90"/>
+        <BufferManager enabled="false"/>
     </Device>
 </ExternalCamera>

@@ -1,14 +1,20 @@
 # Insert car-specific startup services here
+on early-init
+    insmod /vendor/lib/modules/vehicle-core.ko
+    insmod /vendor/lib/modules/vehicle-dummy-hw.ko
+
 on init
     start servicemanager
-    start vendor.rvcam-1-0
-    start vendor.hwcomposer-2-1
-    start vendor.gralloc-4-0
+    start vendor.gralloc-v1
+    start vendor.rockchip_hwcproxy_aidl
+    start hwcomposer-3
     start surfaceflinger
-    start vendor.vehicle-hal-2.0
+    start vendor.rvcam-1-0
+    start vendor.vehicle-hal-rvcam
     start automotive_display
     start evs_rvcam_driver
     start evs_manager
+    start evs_app
 
 on post-fs-data
     mkdir /data/system/car 0700 system system
@@ -20,9 +26,11 @@ on property:persist.automotive.evs.mode=0
     stop automotive_display
     stop evs_rvcam_driver
     stop evs_manager
+    stop evs_app
 
 on property:persist.automotive.evs.mode=1
     # start EVS and automotive display services
     start automotive_display
     start evs_rvcam_driver
     start evs_manager
+    start evs_app

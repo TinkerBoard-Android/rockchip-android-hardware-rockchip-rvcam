@@ -1,5 +1,6 @@
 cc_prebuilt_binary {
     name:"android.hardware.automotive.evs@1.1-rvcam",
+    defaults: ["rvcam_evs_hidl_defaults"],
     soc_specific: true,
     vendor: true,
     relative_install_path: "hw",
@@ -40,4 +41,52 @@ cc_prebuilt_binary {
         none: true,
     },
     check_elf_files: false,
+}
+
+cc_prebuilt_binary {
+    name: "android.hardware.automotive.evs-rvcam",
+    defaults: ["android.hardware.graphics.common-ndk_static", "rvcam_evs_aidl_defaults"],
+    soc_specific: true,
+    vendor: true,
+    relative_install_path: "hw",
+    compile_multilib: "64",
+    srcs: [
+        "vendor/bin/hw/android.hardware.automotive.evs-rvcam",
+    ],
+    shared_libs: [
+        "android.hardware.graphics.bufferqueue@1.0",
+        "android.hardware.graphics.bufferqueue@2.0",
+        "android.hidl.token@1.0-utils",
+        "libEGL",
+        "libGLESv2",
+        "libbase",
+        "libbinder_ndk",
+        "libbufferqueueconverter",
+        "libcamera_metadata",
+        "libhardware_legacy",
+        "libhidlbase",
+        "liblog",
+        "libnativewindow",
+        "libtinyxml2",
+        "libui",
+        "libutils",
+        "libyuv",
+        "librga",
+        "librvcam",
+        "librvcam_client@1.0",
+        "vendor.rockchip.automotive.camera.rvcam@1.0",
+    ],
+    static_libs: [
+        "android.frameworks.automotive.display-V2-ndk",
+        "android.hardware.automotive.evs-V2-ndk",
+        "android.hardware.common-V2-ndk",
+        "libaidlcommonsupport",
+        "libcutils",
+    ],
+    init_rc: [
+        "vendor/etc/init/android.hardware.automotive.evs-rvcam.rc"
+    ],
+    vintf_fragments: [
+        "vendor/etc/vintf/manifest/manifest_android.hardware.automotive.evs-rvcam.xml"
+    ],
 }

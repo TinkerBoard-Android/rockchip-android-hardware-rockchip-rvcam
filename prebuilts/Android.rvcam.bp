@@ -51,31 +51,6 @@ cc_prebuilt_library {
 }
 
 cc_prebuilt_library {
-    name: "vendor.rockchip.automotive.camera.rvcam@1.0-adapter-helper",
-    proprietary: true,
-    vendor: true,
-    compile_multilib: "both",
-    multilib: {
-        lib64: {
-            srcs: ["vendor/lib64/vendor.rockchip.automotive.camera.rvcam@1.0-adapter-helper.so"],
-        },
-        lib32: {
-            srcs: ["vendor/lib/vendor.rockchip.automotive.camera.rvcam@1.0-adapter-helper.so"],
-        },
-    },
-    shared_libs: [
-        "liblog",
-        "libutils",
-        "libcutils",
-        "libhidlbase",
-    ],
-    strip: {
-        none: true,
-    },
-    check_elf_files: false,
-}
-
-cc_prebuilt_library {
     name: "librvcam_client@1.0",
     proprietary: true,
     vendor: true,
