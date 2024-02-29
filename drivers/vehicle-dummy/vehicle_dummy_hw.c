@@ -836,11 +836,11 @@ static int vehicle_dummy_get_adc_gear(struct device *dev,
 		}
 		if (val < 200) {
 			gear = GEAR_0;
-		} else if (val > 200 && val < 1100) {
+		} else if (val > 200 && val < 600) {
 			gear = GEAR_1;
-		} else if (val > 1100 && val < 2200) {
+		} else if (val > 600 && val < 1000) {
 			gear = GEAR_3;
-		} else if (val > 1100 && val < 2200) {
+		} else if (val > 1000 && val < 2200) {
 			gear = GEAR_2;
 		}
 	}
@@ -945,6 +945,7 @@ static void vehicle_dummy_work_func(struct work_struct *work)
 	}
 	dev_info(dev, "gear %u turn %u\n", ddata->gear_button,
 		 ddata->turn_button);
+	schedule_delayed_work(&ddata->handler, msecs_to_jiffies(1000));
 }
 
 static irqreturn_t vehicle_dummy_irq_thread(int irq, void *_data)
@@ -1087,21 +1088,23 @@ static int vehicle_dummy_hw_probe(struct platform_device *pdev)
 #endif
 
 	if (type == VEHICLE_TYPE_ADC) {
+#if 0
 		ddata->irq = platform_get_irq(pdev, 0);
 		if (ddata->irq < 0) {
 			dev_err(dev, "failed to get irq\n");
 			return -ENODEV;
-		}
+		} else {
+			err = request_any_context_irq(ddata->irq,
+						      vehicle_dummy_irq_thread,
+						      IRQF_TRIGGER_HIGH,
+						      dev_name(dev), ddata);
 
-		err = request_any_context_irq(ddata->irq,
-					      vehicle_dummy_irq_thread,
-					      IRQF_TRIGGER_RISING,
-					      dev_name(dev), ddata);
-
-		if (err < 0) {
-			dev_err(dev, "error: irq %d\n", ddata->irq);
-			return err;
+			if (err < 0) {
+				dev_err(dev, "error: irq %d\n", ddata->irq);
+				return err;
+			}
 		}
+#endif
 	} else if (type == VEHICLE_TYPE_GPIO) {
 		if (ddata->gear_reverse) {
 			int irq = gpiod_to_irq(ddata->gear_reverse);
@@ -1129,6 +1132,10 @@ static int vehicle_dummy_hw_probe(struct platform_device *pdev)
 				return err;
 			}
 		}
+	}
+
+	if (type != VEHICLE_TYPE_DUMMY) {
+		schedule_delayed_work(&ddata->handler, msecs_to_jiffies(200));
 	}
 
 	return 0;

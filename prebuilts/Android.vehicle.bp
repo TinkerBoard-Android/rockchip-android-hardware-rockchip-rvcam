@@ -22,35 +22,12 @@ cc_prebuilt_binary {
     check_elf_files: false,
 }
 
-cc_library_headers {
-    name: "VehicleHalDefaultConfigRvcam",
-    vendor: true,
-    local_include_dirs: ["include"],
-    export_include_dirs: ["include"],
-    defaults: ["VehicleHalDefaults", "rvcam_vhal_aidl_defaults"],
-    static_libs: ["VehicleHalUtils"],
-    header_libs: ["VehicleHalTestUtilHeaders"],
-    export_static_lib_headers: ["VehicleHalUtils"],
-    export_header_lib_headers: ["VehicleHalTestUtilHeaders"],
-}
-
 cc_defaults {
     name: "FakeVehicleHardwareDefaultsRvcam",
     header_libs: [
         "IVehicleHardware",
-        "VehicleHalDefaultConfigRvcam",
     ],
     export_header_lib_headers: ["IVehicleHardware"],
-    static_libs: [
-        "VehicleHalJsonConfigLoaderEnableTestProperties",
-        "VehicleHalUtils",
-        "FakeVehicleHalValueGenerators",
-        "FakeObd2Frame",
-        "FakeUserHal",
-        "android.hardware.automotive.vehicle@2.0-libproto-native",
-        "VehicleHalProtoMessageConverter",
-        "VehicleHalProtos",
-    ],
     required: [
         "Prebuilt_VehicleHalDefaultProperties_JSON",
         "Prebuilt_VehicleHalTestProperties_JSON",
@@ -60,7 +37,6 @@ cc_defaults {
         "libjsoncpp",
         "libprotobuf-cpp-full",
     ],
-    export_static_lib_headers: ["VehicleHalUtils"],
 }
 
 cc_prebuilt_binary {

@@ -18,6 +18,8 @@ hal_client_domain(hal_rvcam_default, hal_configstore)
 allow hal_rvcam_default system_data_file:dir { search };
 allow hal_rvcam_default gpu_device:chr_file rw_file_perms;
 allow hal_rvcam_default gpu_device:dir search;
+allow hal_rvcam_default hal_rvcam_data_file:dir r_file_perms;
+allow hal_rvcam_default hal_rvcam_data_file:file rw_file_perms;
 
 get_prop(hal_rvcam_default, vendor_system_public_prop)
 set_prop(hal_rvcam_default, vendor_system_public_prop)

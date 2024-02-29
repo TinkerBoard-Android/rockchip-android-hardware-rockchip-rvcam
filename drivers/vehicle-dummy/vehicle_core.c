@@ -293,7 +293,6 @@ static void netlink_rcv_msg(struct sk_buff *skb)
 	char *buffer;
 	bool status;
 	size_t len;
-	int i;
 	emulator_EmulatorMessage emulator_message;
 	pb_istream_t stream;
 
@@ -304,9 +303,6 @@ static void netlink_rcv_msg(struct sk_buff *skb)
 		umsg = NLMSG_DATA(nlh);
 		len = nlh->nlmsg_len - NLMSG_LENGTH(0);
 		if (umsg) {
-			for (i = 0; i < len; i++)
-				pr_info("%s raw byte %d %d\n", __func__, i,
-					umsg[i]);
 			memcpy(buffer, umsg, len);
 			stream = pb_istream_from_buffer(buffer, len);
 			emulator_message.prop.funcs.decode =
