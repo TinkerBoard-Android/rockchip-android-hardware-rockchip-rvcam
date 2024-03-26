@@ -26,8 +26,7 @@ set_prop(hal_rvcam_default, vendor_system_public_prop)
 
 allow hal_rvcam_default sysfs_board_model:file rw_file_perms;
 
-binder_call(hal_rvcam_default, hal_evs_driver)
-binder_call(hal_evs_driver, hal_rvcam_default)
-
 binder_call(hal_rvcam_default, hal_camera_default)
 binder_call(hal_camera_default, hal_rvcam_default)
+
+allow hal_rvcam_default rga_device:chr_file { read open ioctl write };

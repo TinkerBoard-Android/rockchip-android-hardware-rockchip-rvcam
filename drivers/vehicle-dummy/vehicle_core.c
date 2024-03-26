@@ -121,7 +121,7 @@ void vehicle_hal_set_property(u16 prop, u8 index, u32 value, u32 param)
 		pr_err("buffer alloc failure\n");
 		return;
 	}
-	pr_info("%s: prop %d, index %d, value %d\n", __func__, prop, index,
+	pr_debug("%s: prop %d, index %d, value %d\n", __func__, prop, index,
 		value);
 	property_encode.value = value;
 	switch (prop) {

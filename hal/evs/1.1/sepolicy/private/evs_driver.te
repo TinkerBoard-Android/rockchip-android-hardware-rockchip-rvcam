@@ -8,6 +8,7 @@ init_daemon_domain(hal_evs_driver)
 binder_use(hal_evs_driver)
 
 binder_call(hal_evs_driver hal_rvcam_default);
+binder_call(hal_rvcam_default hal_evs_driver);
 
 # Allow use of USB devices, gralloc buffers, and surface flinger
 allow hal_evs_driver device:dir { open read };

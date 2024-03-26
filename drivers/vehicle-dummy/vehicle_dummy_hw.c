@@ -134,7 +134,7 @@ static struct class *vehicle_dummy_class;
 
 void mcu_set_control_commands(u32 prop, u32 area, u32 value)
 {
-	pr_info("%s: prop %d, area %d, value %d\n", __func__, prop, area,
+	pr_debug("%s: prop %d, area %d, value %d\n", __func__, prop, area,
 		value);
 	switch (prop) {
 	case HVAC_FAN_SPEED:
@@ -891,7 +891,7 @@ static int vehicle_dummy_get_gpio_gear(struct device *dev,
 	if (ddata->gear_reverse) {
 		reverse_value = !!gpiod_get_value(ddata->gear_reverse);
 	}
-	dev_info(dev, "vehicle dummy gpio %d %d\n", park_value, reverse_value);
+	dev_dbg(dev, "vehicle dummy gpio %d %d\n", park_value, reverse_value);
 	if (park_value && reverse_value) {
 		gear = GEAR_2;
 	} else if (!park_value && reverse_value) {
@@ -943,7 +943,7 @@ static void vehicle_dummy_work_func(struct work_struct *work)
 		vehicle_hal_set_property(VEHICLE_TURN_SIGNAL, 0,
 					 ddata->turn_button, 0);
 	}
-	dev_info(dev, "gear %u turn %u\n", ddata->gear_button,
+	dev_dbg(dev, "gear %u turn %u\n", ddata->gear_button,
 		 ddata->turn_button);
 	schedule_delayed_work(&ddata->handler, msecs_to_jiffies(1000));
 }

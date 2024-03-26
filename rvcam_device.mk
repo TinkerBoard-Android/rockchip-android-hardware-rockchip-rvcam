@@ -4,10 +4,10 @@ ifeq ($(strip $(BOARD_CAMERA_SUPPORT_AUTOMOTIVE)), true)
 # RVCAM middleware packages
 ifeq (1, $(strip $(shell expr $(PLATFORM_VERSION) \>= 14)))
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.rvcam.u.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.rvcam.rc
+    $(LOCAL_PATH)/init.rvcam.u.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rvcam.rc
 else
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.rvcam.s.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.rvcam.rc
+    $(LOCAL_PATH)/init.rvcam.s.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rvcam.rc
 endif
 
 PRODUCT_COPY_FILES += \
@@ -38,6 +38,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/hal/evs/app/config.json:$(TARGET_COPY_OUT_VENDOR)/etc/automotive/evs/config_override.json \
     $(LOCAL_PATH)/hal/evs/app/evs_configuration_override.xml:$(TARGET_COPY_OUT_VENDOR)/etc/automotive/evs/evs_configuration_override.xml
+include hardware/rockchip/rvcam/hal/evs/aidl/sepolicy/evsdriver.mk
 
 else
 LOCAL_EVS_PROPERTIES ?= persist.automotive.evs.mode=1
@@ -51,12 +52,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/hal/evs/app/evs_app_config.json:$(TARGET_COPY_OUT_SYSTEM)/etc/automotive/evs/config_override.json \
     $(LOCAL_PATH)/hal/evs/app/evs_configuration_override.xml:$(TARGET_COPY_OUT_VENDOR)/etc/automotive/evs/evs_configuration/evs_configuration_override.xml
 
+include hardware/rockchip/rvcam/hal/evs/1.1/sepolicy/evsdriver.mk
 endif
 
 endif
 
 include packages/services/Car/cpp/evs/apps/sepolicy/evsapp.mk
-include hardware/rockchip/rvcam/hal/evs/1.1/sepolicy/evsdriver.mk
 
 # Camera HAL3 packages
 ifeq ($(strip $(SOONG_CONFIG_rvcam_has_hal3)), true)
