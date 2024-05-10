@@ -34,4 +34,6 @@ allow hal_evs_driver automotive_display_service_server:binder call;
 allow hal_evs_driver fwk_automotive_display_hwservice:hwservice_manager find;
 allow hal_evs_driver automotive_display_service_server:fd use;
 
+allow hal_evs_driver hal_rvcam_hwservice:hwservice_manager { find };
+
 allow hal_evs_driver system_data_file:dir { search };

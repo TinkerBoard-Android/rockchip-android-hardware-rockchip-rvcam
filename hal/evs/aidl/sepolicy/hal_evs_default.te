@@ -5,3 +5,7 @@ allow hal_evs_default graphics_config_writable_prop:file { read open getattr map
 
 allow hal_evs_default system_data_file:dir { search };
 allow hal_evs_default system_prop:file { getattr map };
+
+allow hal_evs_default hal_rvcam_hwservice:hwservice_manager { find };
+allow hal_evs_default property_socket:sock_file { write };
+allow hal_evs_default init:unix_stream_socket {connectto};

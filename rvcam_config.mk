@@ -12,14 +12,15 @@ SOONG_CONFIG_rvcam += \
 	autcam_hal_version \
 	evs_hal_version \
 	vhal_hal_version \
-	has_hwjpeg
+	has_hwjpeg \
+	has_fence
 
 SOONG_CONFIG_rvcam_soc ?= rk3588
 SOONG_CONFIG_rvcam_board ?= evb_v22
 SOONG_CONFIG_rvcam_has_hal3 ?= true
 SOONG_CONFIG_rvcam_has_evs ?= true
 SOONG_CONFIG_rvcam_has_vhal ?= true
-
+SOONG_CONFIG_rvcam_has_fence ?= false
 
 ifeq (1, $(strip $(shell expr $(PLATFORM_VERSION) \>= 14)))
   SOONG_CONFIG_rvcam_autcam_hal_version ?= aidl_V1

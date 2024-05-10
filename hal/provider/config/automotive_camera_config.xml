@@ -50,5 +50,6 @@
         <!-- orientation -->
         <Orientation  degree="90"/>
         <BufferManager enabled="false"/>
+        <HalBufferTransfer enabled="true"/>
     </Device>
 </ExternalCamera>

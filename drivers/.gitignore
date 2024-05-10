@@ -4,6 +4,8 @@
 *.o.*
 *.cmd
 *.swp
+*.o.d
+*.ko
 Module.symvers
 modules.builtin
 modules.order

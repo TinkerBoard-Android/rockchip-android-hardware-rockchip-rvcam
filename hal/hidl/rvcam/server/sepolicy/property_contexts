@@ -1,0 +1,3 @@
+vendor.rockchip.rvcam.start.count   u:object_r:vendor_rvcam_prop:s0
+vendor.rockchip.rvcam.version       u:object_r:vendor_rvcam_prop:s0
+vendor.rockchip.rvcam.build_id      u:object_r:vendor_rvcam_prop:s0

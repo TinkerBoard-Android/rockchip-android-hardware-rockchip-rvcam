@@ -66,10 +66,16 @@ ifeq (1, $(strip $(shell expr $(PLATFORM_VERSION) \>= 14)))
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider-V1-automotive-impl \
     android.hardware.camera.provider-V1-automotive-service
+
+include hardware/rockchip/rvcam/hal/provider/aidl/sepolicy.mk
+
 else
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl-automotive \
     android.hardware.camera.provider@2.4-automotive-service
+
+include hardware/rockchip/rvcam/hal/provider/2.4/sepolicy.mk
+
 endif
 
 PRODUCT_COPY_FILES += \

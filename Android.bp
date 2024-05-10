@@ -3,8 +3,8 @@ soong_config_module_type {
     module_type: "cc_defaults",
     config_namespace: "rvcam",
     variables: ["soc", "board", "autcam_hal_version", "evs_hal_version", "vhal_hal_version"],
-    bool_variables: ["has_evs", "has_hal3"],
-    properties: ["cflags", "srcs", "enabled"],
+    bool_variables: ["has_evs", "has_hal3", "has_vhal", "has_hwjpeg", "has_fence"],
+    properties: ["cflags", "srcs", "enabled", "shared_libs"],
 }
 
 soong_config_string_variable {
@@ -74,6 +74,26 @@ rvcam_cc_defaults {
             },
         },
     },
+}
+
+rvcam_cc_defaults {
+    name: "rvcam_hwjpeg_defaults",
+    soong_config_variables: {
+        has_hwjpeg: {
+            shared_libs: ["libhwjpeg"],
+            cflags: ["-DRK_HW_JPEG_DECODER"],
+        },
+    }
+}
+
+rvcam_cc_defaults {
+    name: "rvcam_fence_defaults",
+    soong_config_variables: {
+        has_fence: {
+            shared_libs: ["libsync"],
+            cflags: ["-DHAS_FENCE"],
+        },
+    }
 }
 
 rvcam_cc_defaults {
