@@ -1,0 +1,2 @@
+allow vendor_init vehicle_device:file create;
+allow vendor_init vehicle_device:file { open write create };
